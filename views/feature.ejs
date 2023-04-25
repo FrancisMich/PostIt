@@ -1,0 +1,62 @@
+<%- include("partials/header"); -%>
+
+    <div class="feature">
+        <div class="feature-heading">
+            <div>
+                <h3>
+                    <%= post.title %>
+                </h3>
+            </div>
+            <div>
+                <h4>
+                    <%= post.content %>
+                </h4>
+                <form action="/posts/<%=post._id%>?_method=delete" method="post">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button class="post-delete" type="submit">
+                        <i class="bx bxs-trash"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="comments-container">
+                <h2>Comments:</h2>
+                <ul>
+                    <% post.comments.forEach(function (comment){ %>
+                        <li>
+                            <%= comment.body %>
+                        </li>
+                        <% }) %>
+
+                </ul>
+            </div>
+        </div>
+        <div class="comment-section">
+            <form action="/posts/<%=post._id%>/comment" method="post">
+                <div>
+                    <i class='bx bxs-comment' id="comment-icon">
+                        <p> comment </p>
+                    </i>
+                    <textarea id="comment-content" name="comment" cols="5" rows="5" style="display: none;"></textarea>
+                </div>
+                <button id="comment-button" type="submit" style="display: none;">submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const icon = document.getElementById('comment-icon');
+        const content = document.getElementById('comment-content');
+        const button = document.getElementById('comment-button');
+
+        icon.addEventListener('click', function () {
+            if (content.style.display || button.style.display === 'none') {
+                content.style.display = 'block';
+                button.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+                button.style.display = 'none';
+            }
+        });
+    </script>
+
+    <%- include("partials/footer"); -%>

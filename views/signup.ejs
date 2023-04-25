@@ -1,0 +1,27 @@
+<%- include("partials/header"); -%>
+
+    <section class="signin-up" id="signup">
+
+        <div class="wrapper">
+
+            <div class="heading">
+                <h2>Register</h2>
+            </div>
+
+            <div class="login-form">
+
+                <form action="/signup" method="POST">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="submit" value="signup">
+
+                </form>
+            </div>
+
+            <div class="button">
+                <a href="/login">Already a member? Login here</a>
+            </div>
+        </div>
+    </section>
+
+    <%- include("partials/footer"); -%>

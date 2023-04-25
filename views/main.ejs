@@ -1,0 +1,60 @@
+<%- include("partials/header"); -%>
+
+<section class="main row">
+  <div id="top" class="main-wrapper col-5">
+    <div class="main-heading">
+      <h1>Welcome!</h1>
+      <h2>Start sharing your secrets anonymously</h2>
+    </div>
+
+    <div class="main-form">
+      <form action="/posts" class="main" method="post">
+        <input type="text" name="title" placeholder="Secret Heading" />
+        <textarea
+          name="content"
+          cols="15"
+          rows="5"
+          placeholder="Start writing a secret"
+        ></textarea>
+        <div
+          class="d-grid gap-2 d-md-flex justify-content-md-end button-container"
+        >
+          <button class="btn btn-primary me-md-2 btn-danger" type="submit">
+            post
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="main-wrapper col-7">
+    <div class="main-heading2">
+      <h1>Newest shared secrets</h1>
+    </div>
+
+    <% if (posts.length> 0){ %> <% posts.forEach(function(post){ %>
+    <div class="secret-post main-a">
+      <h3><%= post.title %></h3>
+      <h4><%= post.content.split(' ').splice(0,29).join(' ') %>...</h4>
+      <a class="content-a" href="/posts/<%= post._id %>">Read more</a> %>
+    </div>
+    <% }) %> <%} else {%>
+    <div>
+      <h2>No secret post at the moment...</h2>
+    </div>
+
+    <%}%> <% if (currentPage > 1) { %>
+    <a href="main?page=<%= (currentPage)-1 %>">Previous</a>
+    <% } %> <% for (let i = 1; i <= totalPages; i++) { %>
+
+    <a href="main?page=<%= i %>"><%= i %></a>
+    <% } %> <% if (currentPage < totalPages) { %>
+    <a href="main?page=<%= (currentPage)+1 %>">Next</a>
+    <% } %>
+
+    <div class="button-container">
+      <a href="/logout" class="btn btn-primary me-md-2 btn-danger">logout</a>
+    </div>
+  </div>
+</section>
+<%- include("partials/footer"); -%>
