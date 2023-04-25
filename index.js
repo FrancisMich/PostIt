@@ -133,7 +133,7 @@ app.post('/posts/:id/comment', function (req, res) {
 
 app.delete('/posts/:id', function (req, res) {
   const id = req.params.id;
-  const userId = req.user; // assuming the user ID is stored in req.user._id after login
+  const userId = req.user;
 
   Post.find(userId)
     .then(function (post) {
@@ -150,18 +150,6 @@ app.delete('/posts/:id', function (req, res) {
       res.redirect('/main');
     });
 });
-
-// app.delete('/posts/:id', function (req, res) {
-//   const id = req.params.id
-//   Post.findByIdAndDelete(id)
-//     .then(function () {
-//       res.redirect('/main')
-//     })
-//     .catch(function (err) {
-//       console.log(err)
-//       res.redirect('/main')
-//     })
-// });
 
 app.listen(3000, function () {
   console.log("server is running at port 3000");
